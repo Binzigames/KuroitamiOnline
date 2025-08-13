@@ -1,3 +1,6 @@
+#libs
+#Colorama ,pyfiglet
+#------------->importing
 import sys
 import time
 try:
@@ -10,9 +13,12 @@ try:
 except Exception:
     pass
 
+import DATA.CORE.SceneManager as SM
+#-------------> booling
+IsRunning = True
 ESC = "\033["
 
-# ---------- Сервісні функції ----------
+#-------------> render functions
 
 def move_home() -> None:
     sys.stdout.write(f"{ESC}H")
@@ -33,15 +39,10 @@ def show_cursor() -> None:
     sys.stdout.write(f"{ESC}?25h")
     sys.stdout.flush()
 
-
-# ---------- Ваш ігровий цикл ----------
-
-IsRunning = True
-
-
+#-------------> game cycle
 def update_screen() -> None:
     move_home()
-    sys.stdout.write( Fore.LIGHTBLACK_EX + "Привіт з кросплатформеного екрана!\n")
+    SM.handle()
     sys.stdout.flush()
 
 
