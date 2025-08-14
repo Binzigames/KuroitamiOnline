@@ -3,6 +3,11 @@
 #------------->importing
 import sys
 import time
+import os
+import platform
+import DATA.CORE.Server as ser
+import DATA.storage as S
+
 try:
     from colorama import just_fix_windows_console, init as colorama_init
     from colorama import Fore
@@ -19,7 +24,11 @@ IsRunning = True
 ESC = "\033["
 
 #-------------> render functions
-
+def when_exit():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
 def move_home() -> None:
     sys.stdout.write(f"{ESC}H")
     sys.stdout.flush()
@@ -52,6 +61,10 @@ def while_running() -> None:
         while IsRunning:
             update_screen()
             time.sleep(0.1)
+            if S.SHmode == True:
+                ser.server_handle()
+
+
     finally:
         show_cursor()
 

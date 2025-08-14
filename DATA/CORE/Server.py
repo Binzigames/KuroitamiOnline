@@ -1,10 +1,9 @@
 #-------------> importing
-import socket as S
 import asyncio as A
 import DATA.storage as D
 
 #-------------> server info handler
-IsServerRunning = True
+IsServerRunning = D.Sstate
 UserIP = D.SIP
 
 #-------------> server magic
