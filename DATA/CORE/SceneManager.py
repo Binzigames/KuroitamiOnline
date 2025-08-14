@@ -3,6 +3,7 @@ import DATA.Drawer as D
 import time as T
 import os
 from enum import Enum
+import platform
 
 # Enums
 class ScenesEnum(Enum):
@@ -33,4 +34,7 @@ def handle():
         a = input()
         if a == 'b':
             sceneInt = ScenesEnum.MENU
-    os.system("clear")
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")

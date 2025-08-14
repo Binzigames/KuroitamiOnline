@@ -11,5 +11,5 @@ if __name__ == "__main__":
             pass
         finally:
             show_cursor()
-            sys.stdout.write("\nВихід.\n")
+            sys.stdout.write("\nEXIT\n")
             sys.stdout.flush()
