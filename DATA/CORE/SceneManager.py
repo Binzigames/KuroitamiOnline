@@ -8,6 +8,7 @@ import platform
 # Enums
 class ScenesEnum(Enum):
     INTRO = 0
+    LOADING = 0.1
     # > main menu
     MENU = 1
     CREDITS = 1.1
@@ -15,11 +16,12 @@ class ScenesEnum(Enum):
 
 #-------------> booling
 sceneInt = ScenesEnum.INTRO
-
+toScreen = 0
 
 #------------->Scene manager logic
 def handle():
     global sceneInt
+    global toScreen
     if sceneInt == ScenesEnum.INTRO:
         D.intro_draw()
         T.sleep(5)
@@ -30,7 +32,9 @@ def handle():
         if a == 'x':
             exit()
         elif a == 'c':
-            sceneInt = ScenesEnum.CREDITS
+            sceneInt = ScenesEnum.LOADING
+            toScreen = ScenesEnum.CREDITS
+            
         elif a == 'o':
             sceneInt = ScenesEnum.OPTIONS
     elif sceneInt == ScenesEnum.CREDITS:
@@ -44,6 +48,11 @@ def handle():
         a = input()
         if a == 'b':
             sceneInt = ScenesEnum.MENU
+
+    elif sceneInt == ScenesEnum.LOADING:
+        D.loading_scene()
+        T.sleep(5)
+        sceneInt = toScreen
 
     # > clear-cross platform
     if platform.system() == "Windows":
