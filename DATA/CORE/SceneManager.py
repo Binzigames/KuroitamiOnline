@@ -24,7 +24,7 @@ def handle():
     global toScreen
     if sceneInt == ScenesEnum.INTRO:
         D.intro_draw()
-        T.sleep(5)
+        T.sleep(3)
         sceneInt = ScenesEnum.MENU
     elif sceneInt == ScenesEnum.MENU:
         D.menu_draw()
@@ -51,7 +51,7 @@ def handle():
 
     elif sceneInt == ScenesEnum.LOADING:
         D.loading_scene()
-        T.sleep(5)
+        T.sleep(3)
         sceneInt = toScreen
 
     # > clear-cross platform
