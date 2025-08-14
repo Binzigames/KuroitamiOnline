@@ -1,6 +1,7 @@
 #------------->importing
 import DATA.Drawer as D
 import time as T
+import os
 from enum import Enum
 
 # Enums
@@ -32,3 +33,4 @@ def handle():
         a = input()
         if a == 'b':
             sceneInt = ScenesEnum.MENU
+    os.system("clear")

@@ -16,7 +16,7 @@ def menu_draw():
     sys.stdout.write(Fore.WHITE + "Devleoped by : Mizumi Studio \n")
 
     sys.stdout.write(Fore.WHITE + "welcome to main menu...\n")
-    sys.stdout.write(Fore.WHITE + "Choose option...\n")
+    sys.stdout.write(Fore.WHITE + "Choose option...\n\n")
     sys.stdout.write(Fore.WHITE + "X - Exit\nC - Credits\n")
 
 def credit_draw():
