@@ -8,8 +8,10 @@ import platform
 # Enums
 class ScenesEnum(Enum):
     INTRO = 0
+    # > main menu
     MENU = 1
-    CREDITS = 2
+    CREDITS = 1.1
+    OPTIONS = 1.2
 
 #-------------> booling
 sceneInt = ScenesEnum.INTRO
@@ -29,11 +31,21 @@ def handle():
             exit()
         elif a == 'c':
             sceneInt = ScenesEnum.CREDITS
+        elif a == 'o':
+            sceneInt = ScenesEnum.OPTIONS
     elif sceneInt == ScenesEnum.CREDITS:
         D.credit_draw()
         a = input()
         if a == 'b':
             sceneInt = ScenesEnum.MENU
+
+    elif sceneInt == ScenesEnum.OPTIONS:
+        D.options_draw()
+        a = input()
+        if a == 'b':
+            sceneInt = ScenesEnum.MENU
+
+    # > clear-cross platform
     if platform.system() == "Windows":
         os.system("cls")
     else:
