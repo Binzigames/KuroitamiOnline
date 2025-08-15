@@ -36,7 +36,7 @@ def intro_draw():
 #> main menu
 def menu_draw():
     sys.stdout.write( Fore.RED + "welcome to\n" )
-    sys.stdout.write( Fore.LIGHTYELLOW_EX + logo)
+    sys.stdout.write( Fore.LIGHTYELLOW_EX + art.logo)
     sys.stdout.write(Fore.WHITE + "Devleoped by : "+ Fore.RED +"Mizumi Studio \n")
 
     sys.stdout.write( Fore.RED + "================\n")
@@ -48,8 +48,7 @@ def menu_draw():
 
 
 def credit_draw():
-    logo_studio = pyfiglet.figlet_format("Mizumi Studio", font="roman")
-    sys.stdout.write(Fore.RED + logo_studio)
+    sys.stdout.write(Fore.RED + art.logo_studio)
     sys.stdout.write( Fore.RED + "================\n")
 
     sys.stdout.write(Fore.YELLOW + "Director, Lead Programmer - "+  Fore.WHITE + "Yehor 'Porko' Kovalenko\n")
@@ -82,7 +81,8 @@ def game_start_draw():
         sys.stdout.write(Fore.YELLOW + text_1)
         sys.stdout.write(Fore.YELLOW + "here will start your mini-world!")
         sys.stdout.write(Fore.RED + "\n================\n")
-        sys.stdout.write(Fore.YELLOW + "here will start your mini-world!")
+        sys.stdout.write(Fore.RED + "Host will not work under game system :( \n")
+        sys.stdout.write(Fore.WHITE + "please open file in game directory with name 'server.py'")
 
     sys.stdout.write(Fore.RED + "\n================\n")
     sys.stdout.write(Fore.WHITE + "Press M(enu) to change mode\n")

@@ -30,15 +30,15 @@ def handle():
     
     if sceneInt == ScenesEnum.INTRO:
         D.intro_draw()
-        T.sleep(3)
-        sceneInt = ScenesEnum.MENU
+        T.sleep(2)
+        loadScene(ScenesEnum.MENU, 1)
     elif sceneInt == ScenesEnum.MENU:
         D.menu_draw()
         a = input()
         if a == 'x':
             exit()
         elif a == 'c':
-            loadScene(ScenesEnum.CREDITS)
+            sceneInt = ScenesEnum.CREDITS
         elif a == 'o':
             sceneInt = ScenesEnum.OPTIONS
         elif a == "s":
@@ -81,10 +81,12 @@ def handle():
         os.system("clear")
     
 
-def loadScene(scene):
+def loadScene(scene , int):
+    global sceneInt , toScreen
+    artUi.unload()
     try:
         sceneInt = ScenesEnum.LOADING
-        artUi.draw_logos()
+        artUi.loader(int)
     finally:
         toScreen = scene
         

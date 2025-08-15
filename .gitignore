@@ -1,2 +1,3 @@
 *.pyc
 DATA/CORE/__pycache__/SceneManager.cpython-313.pyc
+*.pyc

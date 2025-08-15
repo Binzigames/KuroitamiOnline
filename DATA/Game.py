@@ -5,7 +5,6 @@ import sys
 import time
 import os
 import platform
-import DATA.CORE.Server as ser
 import DATA.storage as S
 
 try:
