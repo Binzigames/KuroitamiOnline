@@ -22,7 +22,8 @@ def loading_scene():
         "To be a scientist is to be naive. We are so focused on our search for truth, we fail to consider how few actually want us to find it… What is the cost of lies? — HBO’s Chernobyl <- very cool series\n",
         "Chornobyl is pain of Ukranian Peoples. We need to honor and tell all peoples about it! - Yehor 'Porko' Kovalenko\n",
         "Not great, not terrible. — Anatoly Dyatlov\n",
-        "Як нам прийшла пора прощатися. Піду втоплюся у річці глибокій... спасибі за увагу- Андрій Миколайчук\n"
+        "Як нам прийшла пора прощатися. Піду втоплюся у річці глибокій... спасибі за увагу- Андрій Миколайчук\n",
+        "Never gonna give you up - Rick Astley\n"
     ]
     sys.stdout.write(Fore.WHITE + "\n".join(line[0] for line in art.loading_screen) + "\n")
     sys.stdout.write( Fore.YELLOW + "========\n")
