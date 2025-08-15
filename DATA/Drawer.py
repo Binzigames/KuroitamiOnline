@@ -69,14 +69,19 @@ def game_start_draw():
         sys.stdout.write(Fore.GREEN + text_2)
         sys.stdout.write(Fore.GREEN + "here will start your story!")
         sys.stdout.write(Fore.RED + "\n================\n")
-        if s.Sname == "":
-            sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name")
+        if s.Name == "":
+            sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name\n")
         else:
-            sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Name}")
-        sys.stdout.write(Fore.RED + "\n================\n")
+            sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Name} \n")
+        sys.stdout.write(Fore.GREEN + "enter sip <ip> to add ip to server \n")
+        if s.CIP:
+            sys.stdout.write(Fore.RED + "\n======INFO======\n")
+            sys.stdout.write(Fore.GREEN + f"SERVER IP : {s.CIP}")
 
     else :
         sys.stdout.write(Fore.YELLOW + text_1)
+        sys.stdout.write(Fore.YELLOW + "here will start your mini-world!")
+        sys.stdout.write(Fore.RED + "\n================\n")
         sys.stdout.write(Fore.YELLOW + "here will start your mini-world!")
 
     sys.stdout.write(Fore.RED + "\n================\n")
@@ -88,7 +93,7 @@ def options_draw():
     options_text = pyfiglet.figlet_format("Options", font="roman")
     sys.stdout.write(Fore.RED + options_text)
     sys.stdout.write( Fore.RED + "================\n")
-    sys.stdout.write(Fore.WHITE + "help me! i am dooing some crazy things 3 hours!\n")
+    sys.stdout.write(Fore.WHITE + "help me! i am doing some crazy things 3 hours!\n")
     sys.stdout.write( Fore.RED + "================\n")
     sys.stdout.write(Fore.WHITE + "Press B(ack) to main menu\n")
 
