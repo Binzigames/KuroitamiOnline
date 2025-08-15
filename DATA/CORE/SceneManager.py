@@ -6,6 +6,7 @@ import DATA.CORE.Server as ser
 import os
 from enum import Enum
 import platform
+import DATA.CORE.ArtsUI as artUi
 
 # Enums
 class ScenesEnum(Enum):
@@ -26,6 +27,7 @@ toScreen = 0
 def handle():
     global sceneInt
     global toScreen
+    
     if sceneInt == ScenesEnum.INTRO:
         D.intro_draw()
         T.sleep(3)
@@ -36,8 +38,7 @@ def handle():
         if a == 'x':
             exit()
         elif a == 'c':
-            sceneInt = ScenesEnum.LOADING
-            toScreen = ScenesEnum.CREDITS
+            loadScene(ScenesEnum.CREDITS)
         elif a == 'o':
             sceneInt = ScenesEnum.OPTIONS
         elif a == "s":
@@ -78,3 +79,12 @@ def handle():
         os.system("cls")
     else:
         os.system("clear")
+    
+
+def loadScene(scene):
+    try:
+        sceneInt = ScenesEnum.LOADING
+        artUi.draw_logos()
+    finally:
+        toScreen = scene
+        

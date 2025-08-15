@@ -1,8 +1,19 @@
 #-------------> logos
-import pyfiglet
-logo = pyfiglet.figlet_format("Kuroitami Online", font="doom")
-logo_studio = pyfiglet.figlet_format("Mizumi Studio", font="roman")
+logo = None
+logo_studio = None
 
+
+def draw_logos():
+    global logo, logo_studio
+    import pyfiglet
+    
+    logo = pyfiglet.figlet_format("Kuroitami Online", font="doom")
+    logo_studio = pyfiglet.figlet_format("Mizumi Studio", font="roman")
+
+def unload():
+    global logo, logo_studio
+    logo = None
+    logo_studio = None
 #-------------> arts
 # drop here arts with [""] < list
 #sys.stdout.write(Fore.WHITE + "\n".join(line[0] for line in art) + "\n") < use that to draw them
