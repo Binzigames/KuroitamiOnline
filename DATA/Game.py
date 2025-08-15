@@ -61,8 +61,6 @@ def while_running() -> None:
         while IsRunning:
             update_screen()
             time.sleep(0.1)
-            if S.SHmode == True:
-                ser.server_handle()
 
 
     finally:

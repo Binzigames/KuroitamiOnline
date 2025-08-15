@@ -57,12 +57,16 @@ def handle():
     elif sceneInt == ScenesEnum.GAMESTART:
         D.game_start_draw()
         a = input()
-        if a == 'm':
-            S.SHmode = not S.SHmode
         if a == 'b':
             sceneInt = ScenesEnum.MENU
-        if a == 'h' and S.SHmode == True and S.Sstate == True :
-            ser.server_init()
+        if a == 'm':
+            S.VCM = not S.VCM
+        if S.VCM:
+            if a.startswith("sn ") and S.Name == "":
+                S.Name = a.split(" ", 1)[1]
+            if a.startswith("sip "):
+                S.CIP = a.split(" ", 1)[1]
+
     # > loading screan
     elif sceneInt == ScenesEnum.LOADING:
         D.loading_scene()

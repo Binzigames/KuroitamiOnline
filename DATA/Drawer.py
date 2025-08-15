@@ -65,18 +65,23 @@ def credit_draw():
 def game_start_draw():
     text_1 = pyfiglet.figlet_format("Host", font="roman")
     text_2 = pyfiglet.figlet_format("Connect", font="roman")
-    if s.SHmode == True :
-        sys.stdout.write(Fore.LIGHTYELLOW_EX + text_1)
-    else:
-        sys.stdout.write(Fore.LIGHTGREEN_EX + text_2)
-    sys.stdout.write( Fore.RED + "================\n")
-    sys.stdout.write(Fore.YELLOW + "OPTIONS\n Choose option...\n")
-    sys.stdout.write(Fore.WHITE + "press M to change mod\n press B to return\n")
-    sys.stdout.write(Fore.RED + "================\n")
-    if s.SHmode == True:
-        if s.Sstate == False:
-         sys.stdout.write(Fore.LIGHTYELLOW_EX + "press H to host server\n")
-         sys.stdout.write(Fore.LIGHTYELLOW_EX + f"Current state : {s.server_state}\n")
+    if s.VCM:
+        sys.stdout.write(Fore.GREEN + text_2)
+        sys.stdout.write(Fore.GREEN + "here will start your story!")
+        sys.stdout.write(Fore.RED + "\n================\n")
+        if s.Sname == "":
+            sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name")
+        else:
+            sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Name}")
+        sys.stdout.write(Fore.RED + "\n================\n")
+
+    else :
+        sys.stdout.write(Fore.YELLOW + text_1)
+        sys.stdout.write(Fore.YELLOW + "here will start your mini-world!")
+
+    sys.stdout.write(Fore.RED + "\n================\n")
+    sys.stdout.write(Fore.WHITE + "Press M(enu) to change mode\n")
+    sys.stdout.write(Fore.WHITE + "Press B(ack) to main menu\n")
 
 
 def options_draw():

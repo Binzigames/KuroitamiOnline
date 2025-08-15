@@ -1,11 +1,14 @@
+#place to storage CPU files in memory
 #------------->server info
+#> Host
 SIP = '127.0.0.1'
 Sname = "test server"
-SHmode = False
 Sstate = False
+#> Conect
+CIP = ""
+#-------------> visuals
+VCM = True
 
-server_state = ""
-if Sstate == True:
-    server_state = "stable"
-else :
-    server_state =  "unstable"
+
+#-------------> player data
+Name = ""
