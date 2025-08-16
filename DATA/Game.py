@@ -6,6 +6,7 @@ import time
 import os
 import platform
 import DATA.storage as S
+import pygame as pg
 
 try:
     from colorama import just_fix_windows_console, init as colorama_init
@@ -55,6 +56,7 @@ def update_screen() -> None:
 
 
 def while_running() -> None:
+    pg.mixer.init()
     hide_cursor()
     try:
         while IsRunning:

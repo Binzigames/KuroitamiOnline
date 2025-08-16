@@ -3,17 +3,18 @@ import asyncio as A
 import DATA.storage as D
 import DATA.CORE.ArtsUI as U
 from colorama import  Fore
+import  pyfiglet
 
 # -------------> server info handler
 UserIP = D.SIP
 Srunning = True
 DebugMode = False
-
+logo = pyfiglet.figlet_format("Kuroitami Online", font="doom")
 # -------------> server magic
 #> handle and debug
 async def server_handle():
     if not D.Sstate:
-        print(Fore.RED + U.logo)
+        print(Fore.RED + logo)
         print(Fore.WHITE + "Welcome to server console. developed by : " + Fore.RED + "Mizumi Studio")
         print(Fore.RED +"[SERVER INIT]")
         await server_init()

@@ -56,7 +56,6 @@ def credit_draw():
     sys.stdout.write( Fore.YELLOW + "========\n")
     sys.stdout.write(Fore.YELLOW + "Game Designer, Writer - " + Fore.WHITE + "Andrii 'TricksterFrid' Lekar\n")
     sys.stdout.write( Fore.YELLOW + "========\n")
-    sys.stdout.write(Fore.YELLOW + "Programmer -"+  Fore.WHITE + " Artem 'k_onna' Saveliev\n")
     sys.stdout.write(Fore.YELLOW + "Programmer -"+  Fore.WHITE + " Oleksii 'djighoul29' Ivanyshyn\n")
 
     sys.stdout.write( Fore.RED + "================\n")
