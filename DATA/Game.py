@@ -5,7 +5,6 @@ import sys
 import time
 import os
 import platform
-import DATA.storage as S
 import pygame as pg
 
 try:

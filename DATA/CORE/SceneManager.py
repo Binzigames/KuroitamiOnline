@@ -1,12 +1,12 @@
 #------------->importing
 import DATA.Drawer as D
 import time as T
-import DATA.storage as S
-import DATA.CORE.Server as ser
+import DATA.CORE.storage as S
 import os
 from enum import Enum
 import platform
 import DATA.CORE.ArtsUI as artUi
+import DATA.CORE.ClientHandler as C
 
 # Enums
 class ScenesEnum(Enum):
@@ -67,6 +67,9 @@ def handle():
                 S.Name = a.split(" ", 1)[1]
             if a.startswith("sip "):
                 S.CIP = a.split(" ", 1)[1]
+            if a == 'c':
+                C.join_server(S.CIP)
+
 
     # > loading screan
     elif sceneInt == ScenesEnum.LOADING:

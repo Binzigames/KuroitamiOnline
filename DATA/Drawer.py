@@ -3,8 +3,9 @@ import pyfiglet
 import sys
 import random
 from colorama import Fore
+import DATA.CORE.ClientHandler as C
 import DATA.CORE.ArtsUI as art
-import DATA.storage as s
+import DATA.CORE.storage as s
 
 #-------------> levels functions draw
 logo = pyfiglet.figlet_format("Kuroitami Online", font="doom")
@@ -57,6 +58,7 @@ def credit_draw():
     sys.stdout.write(Fore.YELLOW + "Game Designer, Writer - " + Fore.WHITE + "Andrii 'TricksterFrid' Lekar\n")
     sys.stdout.write( Fore.YELLOW + "========\n")
     sys.stdout.write(Fore.YELLOW + "Programmer -"+  Fore.WHITE + " Oleksii 'djighoul29' Ivanyshyn\n")
+    #sys.stdout.write(Fore.YELLOW + "Programmer -" + Fore.WHITE + " Artem 'k_onna' Saveliev\n") < stupid
 
     sys.stdout.write( Fore.RED + "================\n")
     sys.stdout.write(Fore.WHITE + "Press B(ack) to main menu\n")
@@ -75,7 +77,10 @@ def game_start_draw():
         sys.stdout.write(Fore.GREEN + "enter sip <ip> to add ip to server \n")
         if s.CIP:
             sys.stdout.write(Fore.RED + "\n======INFO======\n")
-            sys.stdout.write(Fore.GREEN + f"SERVER IP : {s.CIP}")
+            sys.stdout.write(Fore.GREEN + f"SERVER IP : {s.CIP}\n")
+            sys.stdout.write(Fore.GREEN + "press C(onnect) to try connect to ip\n")
+            sys.stdout.write(Fore.RED + "\n===SERVER=INFO===\n")
+            sys.stdout.write(Fore.GREEN + C.Clog)
 
     else :
         sys.stdout.write(Fore.YELLOW + text_1)
