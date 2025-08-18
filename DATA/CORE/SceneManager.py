@@ -2,11 +2,13 @@
 import DATA.Drawer as D
 import time as T
 import DATA.CORE.storage as S
+import DATA.CORE.SoundManager as s
 import os
 from enum import Enum
 import platform
 import DATA.CORE.ArtsUI as artUi
 import DATA.CORE.ClientHandler as C
+
 
 # Enums
 class ScenesEnum(Enum):
@@ -23,6 +25,7 @@ class ScenesEnum(Enum):
 sceneInt = ScenesEnum.INTRO
 toScreen = 0
 
+MusicManager = s.MusicManager()
 #------------->Scene manager logic
 def handle():
     global sceneInt
@@ -34,6 +37,7 @@ def handle():
         loadScene(ScenesEnum.MENU, 1)
     elif sceneInt == ScenesEnum.MENU:
         D.menu_draw()
+        MusicManager.play(s.MusicEnum.MENU , 1 , S.volume)
         a = input()
         if a == 'x':
             exit()
@@ -52,6 +56,10 @@ def handle():
     elif sceneInt == ScenesEnum.OPTIONS:
         D.options_draw()
         a = input()
+        if a.startswith("volume "):
+            MusicManager.stop()
+            S.volume = float(a.split(" ", 1)[1])
+            MusicManager.play(s.MusicEnum.MENU, 1, S.volume)
         if a == 'b':
             sceneInt = ScenesEnum.MENU
     # > start game screen

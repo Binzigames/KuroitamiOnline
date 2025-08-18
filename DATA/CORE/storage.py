@@ -9,6 +9,7 @@ CIP = ""
 #-------------> visuals
 VCM = True
 
-
+#>music
+volume = 0.3
 #-------------> player data
-Name = ""
+Pname = ""

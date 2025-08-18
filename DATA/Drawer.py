@@ -70,7 +70,7 @@ def game_start_draw():
         sys.stdout.write(Fore.GREEN + text_2)
         sys.stdout.write(Fore.GREEN + "here will start your story!")
         sys.stdout.write(Fore.RED + "\n================\n")
-        if s.Name == "":
+        if s.Pname == "":
             sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name\n")
         else:
             sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Name} \n")
@@ -98,7 +98,8 @@ def options_draw():
     options_text = pyfiglet.figlet_format("Options", font="roman")
     sys.stdout.write(Fore.RED + options_text)
     sys.stdout.write( Fore.RED + "================\n")
-    sys.stdout.write(Fore.WHITE + "help me! i am doing some crazy things 3 hours!\n")
+    sys.stdout.write(Fore.RED + "current volume: \n" + Fore.YELLOW + f"{s.volume} \n")
+    sys.stdout.write(Fore.WHITE + "enter 'volume <int>' to set volume\n (from 0.0 to 1.0)\n")
     sys.stdout.write( Fore.RED + "================\n")
     sys.stdout.write(Fore.WHITE + "Press B(ack) to main menu\n")
 
