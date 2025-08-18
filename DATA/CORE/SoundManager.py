@@ -10,7 +10,7 @@ class MusicManager:
         pg.mixer.init()
         self.current_track = None
 
-    def play(self, track: MusicEnum, loops=-1, volume=0.5):
+    def play(self, track: MusicEnum, loops=1, volume=0.5):
         if self.current_track != track:
             pg.mixer.music.load(track.value)
             pg.mixer.music.set_volume(volume)

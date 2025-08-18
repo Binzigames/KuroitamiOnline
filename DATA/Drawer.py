@@ -73,12 +73,13 @@ def game_start_draw():
         if s.Pname == "":
             sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name\n")
         else:
-            sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Name} \n")
+            sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Pname} \n")
         sys.stdout.write(Fore.GREEN + "enter sip <ip> to add ip to server \n")
         if s.CIP:
             sys.stdout.write(Fore.RED + "\n======INFO======\n")
             sys.stdout.write(Fore.GREEN + f"SERVER IP : {s.CIP}\n")
             sys.stdout.write(Fore.GREEN + "press C(onnect) to try connect to ip\n")
+        if C.IsOnline:
             sys.stdout.write(Fore.RED + "\n===SERVER=INFO===\n")
             sys.stdout.write(Fore.GREEN + C.Clog)
 

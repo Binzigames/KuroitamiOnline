@@ -8,6 +8,7 @@ from enum import Enum
 import platform
 import DATA.CORE.ArtsUI as artUi
 import DATA.CORE.ClientHandler as C
+import DATA.CORE.GameHandler as g
 
 
 # Enums
@@ -20,7 +21,8 @@ class ScenesEnum(Enum):
     OPTIONS = 1.2
     # > start menu
     GAMESTART = 1.3
-
+    # > game
+    GAME = 2
 #-------------> booling
 sceneInt = ScenesEnum.INTRO
 toScreen = 0
@@ -57,9 +59,7 @@ def handle():
         D.options_draw()
         a = input()
         if a.startswith("volume "):
-            MusicManager.stop()
             S.volume = float(a.split(" ", 1)[1])
-            MusicManager.play(s.MusicEnum.MENU, 1, S.volume)
         if a == 'b':
             sceneInt = ScenesEnum.MENU
     # > start game screen
@@ -71,12 +71,18 @@ def handle():
         if a == 'm':
             S.VCM = not S.VCM
         if S.VCM:
-            if a.startswith("sn ") and S.Name == "":
-                S.Name = a.split(" ", 1)[1]
+            if a.startswith("sn ") and S.Pname == "":
+                S.Pname = a.split(" ", 1)[1]
             if a.startswith("sip "):
                 S.CIP = a.split(" ", 1)[1]
-            if a == 'c':
+            if a == 'c' and not S.Pname == "" :
                 C.join_server(S.CIP)
+
+        if C.IsOnline == True:
+            sceneInt = ScenesEnum.GAME
+    # > game
+    elif sceneInt == ScenesEnum.GAME:
+        g.Handle()
 
 
     # > loading screan

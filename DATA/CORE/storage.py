@@ -8,7 +8,7 @@ Sstate = False
 CIP = ""
 #-------------> visuals
 VCM = True
-
+FirsTime = True
 #>music
 volume = 0.3
 #-------------> player data
