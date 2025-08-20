@@ -34,12 +34,12 @@ def loading_scene():
 def intro_draw():
     sys.stdout.write(Fore.YELLOW+ "Welcome to:\n")
     sys.stdout.write(Fore.YELLOW + logo)
-    sys.stdout.write(Fore.WHITE + "Devleoped by :" + Fore.RED + "Mizumi Studio\n")
+    sys.stdout.write(Fore.WHITE + "Developed by " + Fore.RED + "Mizumi Studio\n")
 #> main menu
 def menu_draw():
     sys.stdout.write( Fore.RED + "welcome to\n" )
     sys.stdout.write( Fore.LIGHTYELLOW_EX + art.logo)
-    sys.stdout.write(Fore.WHITE + "Devleoped by : "+ Fore.RED +"Mizumi Studio \n")
+    sys.stdout.write(Fore.WHITE + "Developed by "+ Fore.RED +"Mizumi Studio \n")
 
     sys.stdout.write( Fore.RED + "================\n")
     sys.stdout.write(Fore.YELLOW + "MAIN MENU\n")
