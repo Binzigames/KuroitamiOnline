@@ -13,3 +13,4 @@ FirsTime = True
 volume = 0.3
 #-------------> player data
 Pname = ""
+P_ATTRIBUTES = {}

@@ -71,7 +71,7 @@ def game_start_draw():
         sys.stdout.write(Fore.GREEN + "here will start your story!")
         sys.stdout.write(Fore.RED + "\n================\n")
         if s.Pname == "":
-            sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nick name\n")
+            sys.stdout.write(Fore.GREEN + "enter sn <your name> to create your nickname\n")
         else:
             sys.stdout.write(Fore.GREEN + f"Welcome , {Fore.YELLOW + s.Pname} \n")
         sys.stdout.write(Fore.GREEN + "enter sip <ip> to add ip to server \n")
