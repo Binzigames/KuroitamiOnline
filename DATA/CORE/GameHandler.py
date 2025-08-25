@@ -4,11 +4,18 @@ import DATA.CORE.GameUI as g
 import DATA.CORE.storage as s
 import asyncio as A
 import DATA.CORE.SceneManager as S
+import platform
+import os
 #-------------> cycle
 def Handle():
     while c.IsOnline:
         g.main_screen()
         A.run(c.client_flow(s.CIP, 8989))
+
+        if platform.system() == "Windows":
+            os.system("cls")
+        else:
+            os.system("clear")
     else :
         g.reconect_screen()
         S.loadScene(S.ScenesEnum.MENU , 1)
