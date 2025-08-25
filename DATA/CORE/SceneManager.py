@@ -83,7 +83,7 @@ def handle():
                 C.join_server(S.CIP)
 
         if C.IsOnline == True:
-            sceneInt = ScenesEnum.GAME
+            loadScene(ScenesEnum.GAME , 2)
     # > game
     elif sceneInt == ScenesEnum.GAME:
         g.Handle()

@@ -100,7 +100,6 @@ def options_draw():
     options_text = pyfiglet.figlet_format("Options", font="roman")
     sys.stdout.write(Fore.RED + options_text)
     sys.stdout.write( Fore.RED + "================\n")
-    answer = None
     if MusicBool:
         answer = Fore.YELLOW + str(s.volume)
     else:

@@ -30,6 +30,7 @@ async def connect_to_server(cip: str, port: int = 8989):
         Clog = f"[CLIENT] Connected to {cip}:{port}"
         return True
     except Exception as e:
+        IsOnline = False
         Clog = f"[CLIENT ERROR] {e}"
         return False
 
