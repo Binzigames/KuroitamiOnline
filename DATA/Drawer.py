@@ -6,6 +6,7 @@ from colorama import Fore
 import DATA.CORE.ClientHandler as C
 import DATA.CORE.ArtsUI as art
 import DATA.CORE.storage as s
+from DATA.CORE.SoundManager import MusicBool
 
 #-------------> levels functions draw
 logo = pyfiglet.figlet_format("Kuroitami Online", font="doom")
@@ -99,8 +100,14 @@ def options_draw():
     options_text = pyfiglet.figlet_format("Options", font="roman")
     sys.stdout.write(Fore.RED + options_text)
     sys.stdout.write( Fore.RED + "================\n")
-    sys.stdout.write(Fore.RED + "current volume: \n" + Fore.YELLOW + f"{s.volume} \n")
-    sys.stdout.write(Fore.WHITE + "enter 'volume <int>' to set volume\n (from 0.0 to 1.0)\n")
+    answer = None
+    if MusicBool:
+        answer = Fore.YELLOW + str(s.volume)
+    else:
+        answer = Fore.RED + "*disabled*"
+    sys.stdout.write(Fore.RED + "current volume: \n" + answer)
+    sys.stdout.write(Fore.WHITE + "\nenter 'volume <int>' to set volume\n (from 0.0 to 1.0)\n")
+    sys.stdout.write(Fore.WHITE + "to disable music enter : 'md'\n")
     sys.stdout.write( Fore.RED + "================\n")
     sys.stdout.write(Fore.WHITE + "Press B(ack) to main menu\n")
 

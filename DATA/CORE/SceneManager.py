@@ -60,6 +60,10 @@ def handle():
         a = input()
         if a.startswith("volume "):
             S.volume = float(a.split(" ", 1)[1])
+        if a == 'md':
+            MusicManager.update()
+            s.MusicBool = not s.MusicBool
+
         if a == 'b':
             sceneInt = ScenesEnum.MENU
     # > start game screen
