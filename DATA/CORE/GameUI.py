@@ -7,22 +7,29 @@ from colorama import Fore
 import DATA.CORE.storage as s
 import DATA.CORE.ArtsUI as art
 import DATA.CORE.Character as C
+import platform
+import os
 #-------------> draw functions
 avatar= C.Character
-a = input()
+
 def main_screen():
     if s.FirsTime == True:
         sys.stdout.write(Fore.WHITE + f"welcome to the zone , {Fore.RED + s.Pname}\n")
         sys.stdout.write(Fore.RED + "================\n")
         sys.stdout.write(Fore.WHITE + "Welcome to the Exclusion Zone - a post-apocalyptic world where the catastrophe of 2000 has changed reality.\n Explore abandoned cities, forests and rifts, survive among mutants, fight for rare materials and uncover the secret of the Soul of the Zone.\n Create a character, join a faction and become a legend of the Zone. Only you decide which path to choose.\n Dare to challenge the Zone.\n")
         sys.stdout.write(Fore.RED + "================\n")
-        sys.stdout.write(Fore.WHITE + "enter 'C' to continue")
+        sys.stdout.write(Fore.WHITE + "enter 'C' to continue\n")
+        a = input()
         if a == "c" and s.FirsTime:
+            if platform.system() == "Windows":
+                os.system("cls")
+            else:
+                os.system("clear")
             char_create()
 
 def char_create():
     # > draw
-    sys.stdout.write(Fore.YELLOW + art.peoples)
+    sys.stdout.write(Fore.WHITE + "\n".join(line[0] for line in art.peoples) + "\n")
     sys.stdout.write(Fore.RED + "================\n")
     sys.stdout.write(Fore.WHITE + "CREATE YOUR CHARACTER...\n")
     sys.stdout.write(Fore.YELLOW + "OPTIONS :\n")
@@ -35,6 +42,7 @@ def char_create():
     # >func
     points = 20
     #incrce
+    a = input()
     if a == "add ":
         opt = float(a.split(" ", 1)[1])
         #check in opt(inos) in input
