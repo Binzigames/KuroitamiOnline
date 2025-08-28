@@ -1,10 +1,8 @@
-#script to store/create Fractions
-#---------------------------------> importing
 from enum import Enum
 import random as r
 
 
-#---------------------------------> enum
+# ---------------------------------> enum
 class FractionsEnum(Enum):
     PLACEHOLDER = "placeholder"
 
@@ -23,190 +21,124 @@ class FractionsEnum(Enum):
 
 FRACTION_REGISTRY = {}
 
-#---------------------------------> enum політики
+# ---------------------------------> policy enum
 class PolicyType(Enum):
     AGGRESSOR = "aggressor"
     DIPLOMAT = "diplomat"
     OPPORTUNIST = "opportunist"
     NEUTRAL = "neutral"
 
-#---------------------------------> fraction class
+# ---------------------------------> fraction class
 class Fraction:
-    def __init__(self, name, weaponsList, power , Prep, policy: PolicyType = PolicyType.NEUTRAL):
+    def __init__(self, name, weapons_list, power, prep, policy: PolicyType = PolicyType.NEUTRAL):
         self.name = name
-        self.weaponsList = weaponsList
+        self.weapons_list = weapons_list
         self.power = power
-        self.Prep = Prep
+        self.prep = prep
         self.policy = policy
-        self.relations = {}
-        self.army = power  # військовий потенціал (може зростати чи падати)
-        self.losses = 0    # накопичені втрати
+        self.army = power
+        self.losses = 0
 
     def create(self):
         FractionsEnum.register(self.name, self)
 
-    # -------------------- ПОЛІТИКА --------------------
-    def set_relation(self, other, status: str):
-        self.relations[other.name] = status
-        other.relations[self.name] = status
-
-    def relation_with(self, other):
-        return self.relations.get(other.name, "neutral")
-
-    def declare_war(self, other):
-        print(f"{self.name} оголосили війну {other.name}.")
-        self.set_relation(other, "war")
-
-    def make_peace(self, other):
-        print(f"{self.name} уклали мир з {other.name}.")
-        self.set_relation(other, "peace")
-
-    def form_alliance(self, other):
-        print(f"{self.name} утворили альянс із {other.name}.")
-        self.set_relation(other, "ally")
-
-    def betray(self, other):
-        print(f"{self.name} зрадили {other.name}.")
-        self.set_relation(other, "enemy")
-
-    # -------------------- АВТО-ПОВЕДІНКА --------------------
-    def political_action(self, frac_list):
-        targets = [f for f in frac_list if f.name != self.name]
-
-        if self.policy == PolicyType.AGGRESSOR:
-            target = r.choice(targets)
-            self.declare_war(target)
-
-        elif self.policy == PolicyType.DIPLOMAT:
-            target = r.choice(targets)
-            if self.relation_with(target) != "ally":
-                self.form_alliance(target)
-
-        elif self.policy == PolicyType.OPPORTUNIST:
-            weaker = [f for f in targets if f.power < self.power]
-            stronger = [f for f in targets if f.power >= self.power]
-            if weaker:
-                target = r.choice(weaker)
-                self.declare_war(target)
-            elif stronger:
-                target = r.choice(stronger)
-                self.form_alliance(target)
-
-        elif self.policy == PolicyType.NEUTRAL:
-            print(f"{self.name} залишаються осторонь (нейтралітет).")
-
-    # -------------------- ВІЙСЬКО --------------------
-    def train_army(self):
+    # -------------------- ARMY --------------------
+    def train_army(self, events):
         growth = r.randint(10, 50)
         self.army += growth
-        print(f"{self.name} тренують війська (+{growth} сили). Тепер: {self.army}")
+        events.append(f"{self.name} trained their army (+{growth}). Army: {self.army}")
 
-    def suffer_losses(self, amount):
+    def suffer_losses(self, amount, events):
         self.losses += amount
         self.army = max(0, self.army - amount)
-        print(f"{self.name} втратили {amount} солдатів. (Залишилось: {self.army})")
+        events.append(f"{self.name} suffered {amount} losses. Remaining army: {self.army}")
 
     def __repr__(self):
-        return f"<Fraction {self.name}, army={self.army}, policy={self.policy.value}, relations={self.relations}>"
+        return f"<Fraction {self.name}, army={self.army}, policy={self.policy.value}>"
 
 # ---------------------------------> fractions
-Zones_shadows = Fraction("Zones shadows", ["shit", "shit"], 200, 0, PolicyType.DIPLOMAT)
-LRR = Fraction("LRR", ["shit", "shit"], 50, 0, PolicyType.NEUTRAL)
-Black_border = Fraction("Black_border", ["shit", "shit"], 400, 0, PolicyType.OPPORTUNIST)
-Uranis_235 = Fraction("Uranis-235", ["shit", "shit"], 300, 0, PolicyType.AGGRESSOR)
+Zones_shadows = Fraction("Zones shadows", ["basic", "basic"], 200, 0, PolicyType.DIPLOMAT)
+LRR = Fraction("LRR", ["basic", "basic"], 50, 0, PolicyType.NEUTRAL)
+Black_border = Fraction("Black border", ["basic", "basic"], 400, 0, PolicyType.NEUTRAL)
+Uranis_235 = Fraction("Uranis-235", ["basic", "basic"], 300, 0, PolicyType.AGGRESSOR)
+Dogs_ruins = Fraction("Dogs of ruins", ["basic", "basic"], 350, 0, PolicyType.OPPORTUNIST)
 
-#--------------------------------->create
+# ---------------------------------> create
 def load_fractions():
-    global Zones_shadows , LRR , Black_border , Uranis_235
+    global Zones_shadows, LRR, Black_border, Uranis_235, Dogs_ruins
     Zones_shadows.create()
     LRR.create()
     Black_border.create()
     Uranis_235.create()
+    Dogs_ruins.create()
 
-#---------------------------------> fight
-def fraction_power(fraction: Fraction, enemy: Fraction) -> int:
+# ---------------------------------> fight
+def fraction_power(fraction: Fraction) -> int:
     base = fraction.army
     random_bonus = r.randint(-20, 80)
-
-    relation = fraction.relation_with(enemy)
-    if relation == "ally":
-        base += 30
-    elif relation in ["enemy", "war"]:
-        base -= 10
-    elif relation == "peace":
-        base += 10
-
     return max(0, base + random_bonus)
 
-def fraction_fight(frac1: Fraction, frac2: Fraction) -> Fraction:
-    relation = frac1.relation_with(frac2)
+def fraction_fight(frac1: Fraction, frac2: Fraction, events) -> Fraction:
+    power1 = fraction_power(frac1)
+    power2 = fraction_power(frac2)
 
-    if relation == "ally":
-        print(f"{frac1.name} та {frac2.name} — союзники. Вони не воюють.")
-        return None
-    if relation == "peace":
-        print(f"{frac1.name} та {frac2.name} мають мирний договір. Битви немає.")
-        return None
-
-    power1 = fraction_power(frac1, frac2)
-    power2 = fraction_power(frac2, frac1)
-
-    print(f"{frac1.name} ({power1}) VS {frac2.name} ({power2})")
+    events.append(f"{frac1.name} ({power1}) vs {frac2.name} ({power2})")
 
     if power1 > power2:
         losses = r.randint(20, 60)
-        frac2.suffer_losses(losses)
+        frac2.suffer_losses(losses, events)
+        events.append(f"Winner: {frac1.name}")
         return frac1
     elif power2 > power1:
         losses = r.randint(20, 60)
-        frac1.suffer_losses(losses)
+        frac1.suffer_losses(losses, events)
+        events.append(f"Winner: {frac2.name}")
         return frac2
     else:
-        print("Нічия! Обидві сторони зазнали втрат.")
-        frac1.suffer_losses(r.randint(10, 30))
-        frac2.suffer_losses(r.randint(10, 30))
+        events.append("Draw! Both sides suffered losses.")
+        frac1.suffer_losses(r.randint(10, 30), events)
+        frac2.suffer_losses(r.randint(10, 30), events)
         return None
 
-#---------------------------------> war handler
-def war_frac_handle(frac_list):
-    cycles = r.randint(5, 10)
-    score = {f: 0 for f in frac_list}
+# ---------------------------------> game loop
+def fraction_tick(frac_list, tick_num):
+    events = []
+    events.append(f"=== Tick {tick_num} ===")
 
-    print(f"\nВійна почалась! {cycles} битв!")
+    # army growth
+    for f in frac_list:
+        f.train_army(events)
 
-    for i in range(cycles):
+    # random battle
+    if r.random() < 0.5:
         side_1, side_2 = r.sample(frac_list, 2)
-        print(f"\nРаунд {i+1}:")
-        winner = fraction_fight(side_1, side_2)
-        if winner:
-            score[winner] += 1
-            print(f"Переможець: {winner.name}")
-        else:
-            print("Нічия/союз/мир")
+        events.append(f"Random battle between {side_1.name} and {side_2.name}:")
+        fraction_fight(side_1, side_2, events)
 
-    print("\n=== Підсумки війни ===")
-    for frac, pts in score.items():
-        print(f"{frac.name}: {pts} перемог, {frac.losses} втрат, {frac.army} армія залишилась")
+    # economy
+    for f in frac_list:
+        income = r.randint(50, 150)
+        f.prep += income
+        events.append(f"{f.name} received {income} resources. Total: {f.prep}")
 
-    winner = max(score, key=score.get)
-    print(f"\n>>> Загальний переможець: {winner.name} <<<")
+    # world status
+    events.append("=== World status ===")
+    for f in frac_list:
+        events.append(f"- {f.name}: army={f.army}, resources={f.prep}, policy={f.policy.value}")
 
-    losers = [f for f, pts in score.items() if pts < score[winner]]
-    for loser in losers:
-        if loser.relation_with(winner) in ["enemy", "war"]:
-            loser.make_peace(winner)
-
-    return winner
+    return events
 
 
 if __name__ == "__main__":
     load_fractions()
-    frac_list = [Zones_shadows , LRR , Black_border , Uranis_235]
+    frac_list = [Zones_shadows, LRR, Black_border, Uranis_235, Dogs_ruins]
 
-    print("\n=== Політичні дії перед війною ===")
-    for f in frac_list:
-        f.political_action(frac_list)
-        f.train_army()
-
-    print("\n=== Початок війни ===")
-    war_frac_handle(frac_list)
+    tick = 1
+    while True:
+        events = fraction_tick(frac_list, tick)
+        for e in events:
+            print(e)
+        tick += 1
+        cmd = input("\nPress Enter for next tick, or 'exit' to quit: ")
+        if cmd.lower() == "exit":
+            break

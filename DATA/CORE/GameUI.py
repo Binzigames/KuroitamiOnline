@@ -91,7 +91,8 @@ def char_create():
             points += 1
 
 
-
+def zone_enter():
+    
 
 
 
