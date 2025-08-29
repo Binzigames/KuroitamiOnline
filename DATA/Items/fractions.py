@@ -30,7 +30,7 @@ class PolicyType(Enum):
 
 # ---------------------------------> fraction class
 class Fraction:
-    def __init__(self, name, weapons_list, power, prep, policy: PolicyType = PolicyType.NEUTRAL):
+    def __init__(self, name, weapons_list, power, prep, policy: PolicyType = PolicyType.NEUTRAL , Prep = 0):
         self.name = name
         self.weapons_list = weapons_list
         self.power = power
@@ -38,6 +38,7 @@ class Fraction:
         self.policy = policy
         self.army = power
         self.losses = 0
+        self.Prep = Prep
 
     def create(self):
         FractionsEnum.register(self.name, self)
@@ -57,11 +58,18 @@ class Fraction:
         return f"<Fraction {self.name}, army={self.army}, policy={self.policy.value}>"
 
 # ---------------------------------> fractions
-Zones_shadows = Fraction("Zones shadows", ["basic", "basic"], 200, 0, PolicyType.DIPLOMAT)
-LRR = Fraction("LRR", ["basic", "basic"], 50, 0, PolicyType.NEUTRAL)
-Black_border = Fraction("Black border", ["basic", "basic"], 400, 0, PolicyType.NEUTRAL)
-Uranis_235 = Fraction("Uranis-235", ["basic", "basic"], 300, 0, PolicyType.AGGRESSOR)
-Dogs_ruins = Fraction("Dogs of ruins", ["basic", "basic"], 350, 0, PolicyType.OPPORTUNIST)
+#> player rep (Prep)
+ZSPrep = 0
+LRRPrep= 0
+BBPrep = 0
+U2Prep = 0
+DRPrep = 0
+#> frac
+Zones_shadows = Fraction("Zones shadows", ["basic", "basic"], 200, 0, PolicyType.DIPLOMAT  , ZSPrep)
+LRR = Fraction("LRR", ["basic", "basic"], 50, 0, PolicyType.NEUTRAL , LRRPrep)
+Black_border = Fraction("Black border", ["basic", "basic"], 400, 0, PolicyType.NEUTRAL , BBPrep)
+Uranis_235 = Fraction("Uranis-235", ["basic", "basic"], 300, 0, PolicyType.AGGRESSOR , U2Prep)
+Dogs_ruins = Fraction("Dogs of ruins", ["basic", "basic"], 350, 0, PolicyType.OPPORTUNIST , DRPrep)
 
 # ---------------------------------> create
 def load_fractions():
